@@ -10,6 +10,7 @@ import br.com.fiap.model.dto.Filme;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FilmeController {
     public String inserirFilme(String titulo, String genero, String produtora) throws ClassNotFoundException, SQLException {
@@ -19,8 +20,8 @@ public class FilmeController {
         filme.setTitulo(titulo);
         filme.setGenero(genero);
         filme.setProdutora(produtora);
-        FilmeDAO filmeDAO = new FilmeDAO();
-        resultado = filmeDAO.inserir();
+        FilmeDAO filmeDAO = new FilmeDAO(con);
+        resultado = filmeDAO.inserir(filme);
         ConnectionFactory.fecharConexao(con);
         return resultado;
     }
@@ -33,8 +34,8 @@ public class FilmeController {
         filme.setTitulo(titulo);
         filme.setGenero(genero);
         filme.setProdutora(produtora);
-        FilmeDAO filmeDAO = new FilmeDAO();
-        resultado = filmeDAO.alterar();
+        FilmeDAO filmeDAO = new FilmeDAO(con);
+        resultado = filmeDAO.alterar(filme);
         ConnectionFactory.fecharConexao(con);
         return resultado;
     }
@@ -44,18 +45,27 @@ public class FilmeController {
         Connection con = ConnectionFactory.abrirConexao();
         Filme filme = new Filme();
         filme.setCodigo(codigo);
-        FilmeDAO filmeDAO = new FilmeDAO();
-        resultado = filmeDAO.excluir();
+        FilmeDAO filmeDAO = new FilmeDAO(con);
+        resultado = filmeDAO.excluir(filme);
         ConnectionFactory.fecharConexao(con);
         return resultado;
     }
 
     public String listarTodosFilmes() throws ClassNotFoundException, SQLException{
-        String resultado;
+        String resultado = "";
         Connection con = ConnectionFactory.abrirConexao();
-        FilmeDAO filmeDAO = new FilmeDAO();
-        resultado = filmeDAO.listarTodos();
+        FilmeDAO filmeDAO = new FilmeDAO(con);
+        ArrayList<Filme> filmes = filmeDAO.listarTodos();
         ConnectionFactory.fecharConexao(con);
+
+        for (Filme filme : filmes) {
+            resultado +=
+                    "Código: " + filme.getCodigo() + "\n" +
+                    "Título: " + filme.getTitulo() + "\n" +
+                    "Gênero: " + filme.getGenero() + "\n" +
+                    "Produtora: " + filme.getProdutora() + "\n" +
+                    "-----------------------------\n";
+        }
         return resultado;
     }
 }

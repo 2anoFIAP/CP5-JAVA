@@ -15,8 +15,8 @@ public class ConnectionFactory {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             String url = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL";
-            final String USER = "";
-            final String PASS = "";
+            final String USER = "RM561848";
+            final String PASS = "290905";
             con = DriverManager.getConnection(url, USER, PASS);
         } catch (ClassNotFoundException e) {
             System.out.println("ERRO: A classe de conexão não foi encontrada\n" + e.getMessage());
@@ -28,17 +28,20 @@ public class ConnectionFactory {
         return con;
     }
 
-    public static Connection fecharConexao(Connection con){
+    public static void fecharConexao(Connection con){
         try {
-            con.close();
-            System.out.println("Conexão fechada!");
+            if(con != null) {
+                con.close();
+                System.out.println("Conexão fechada!");
+            }
         } catch (SQLException e) {
-            System.out.println("ERRO: erro de SQL" + e.getMessage());
+            System.out.println("ERRO: erro de SQL"
+                    + e.getMessage());
         } catch (Exception e) {
-            System.out.println("ERRO:" + e.getMessage());
+            System.out.println("ERRO:"
+                    + e.getMessage()
+            );
         }
-        return con;
     }
-
 }
 
