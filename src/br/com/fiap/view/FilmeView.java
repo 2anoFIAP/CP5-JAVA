@@ -61,7 +61,7 @@ public class FilmeView {
                         break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Insira somente valores numéricos!");
+                System.out.println("Insira somente valores númericos!");
             } catch (Exception e) {
                 System.out.println("Erro! " + e.getMessage());
             }
