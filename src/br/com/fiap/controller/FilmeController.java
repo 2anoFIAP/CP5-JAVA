@@ -29,6 +29,7 @@ public class FilmeController {
         String resultado;
         Connection con = ConnectionFactory.abrirConexao();
         Filme filme = new Filme();
+        filme.setCodigo(codigo);
         filme.setTitulo(titulo);
         filme.setGenero(genero);
         filme.setProdutora(produtora);
