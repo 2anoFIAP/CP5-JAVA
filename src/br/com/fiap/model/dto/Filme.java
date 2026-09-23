@@ -5,4 +5,8 @@
 package br.com.fiap.model.dto;
 
 public class Filme {
+    private int codigo;
+    private String titulo;
+    private String genero;
+    private String produtora;
 }

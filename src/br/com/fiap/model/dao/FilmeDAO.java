@@ -5,4 +5,19 @@
 package br.com.fiap.model.dao;
 
 public class FilmeDAO {
+    public String inserir(){
+
+    }
+
+    public String alterar(){
+
+    }
+
+    public String excluir(){
+
+    }
+
+    public String listarTodos(){
+
+    }
 }
