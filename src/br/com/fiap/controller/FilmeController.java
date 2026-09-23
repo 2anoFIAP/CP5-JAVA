@@ -5,6 +5,7 @@
 package br.com.fiap.controller;
 
 import br.com.fiap.model.dao.ConnectionFactory;
+import br.com.fiap.model.dao.FilmeDAO;
 import br.com.fiap.model.dto.Filme;
 
 import java.sql.Connection;
@@ -15,18 +16,45 @@ public class FilmeController {
         String resultado;
         Connection con = ConnectionFactory.abrirConexao();
         Filme filme = new Filme();
-
+        filme.setTitulo(titulo);
+        filme.setGenero(genero);
+        filme.setProdutora(produtora);
+        FilmeDAO filmeDAO = new FilmeDAO();
+        resultado = filmeDAO.inserir();
+        ConnectionFactory.fecharConexao(con);
+        return resultado;
     }
 
-    public String alterarFilme(int codigo, String titulo, String genero, String produtora){
-
+    public String alterarFilme(int codigo, String titulo, String genero, String produtora) throws ClassNotFoundException, SQLException{
+        String resultado;
+        Connection con = ConnectionFactory.abrirConexao();
+        Filme filme = new Filme();
+        filme.setTitulo(titulo);
+        filme.setGenero(genero);
+        filme.setProdutora(produtora);
+        FilmeDAO filmeDAO = new FilmeDAO();
+        resultado = filmeDAO.alterar();
+        ConnectionFactory.fecharConexao(con);
+        return resultado;
     }
 
-    public String excluirFilme(int codigo){
-
+    public String excluirFilme(int codigo) throws ClassNotFoundException, SQLException {
+        String resultado;
+        Connection con = ConnectionFactory.abrirConexao();
+        Filme filme = new Filme();
+        filme.setCodigo(codigo);
+        FilmeDAO filmeDAO = new FilmeDAO();
+        resultado = filmeDAO.excluir();
+        ConnectionFactory.fecharConexao(con);
+        return resultado;
     }
 
-    public String listarTodosFilmes(){
-
+    public String listarTodosFilmes() throws ClassNotFoundException, SQLException{
+        String resultado;
+        Connection con = ConnectionFactory.abrirConexao();
+        FilmeDAO filmeDAO = new FilmeDAO();
+        resultado = filmeDAO.listarTodos();
+        ConnectionFactory.fecharConexao(con);
+        return resultado;
     }
 }
